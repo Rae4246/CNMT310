@@ -1,7 +1,7 @@
 <?php
 class HtmlClass {
 	function createHeadSection(){
-		$headHtml = "";
+		$headHtml =  "";
 		$headHtml .= "<!doctype html><html>";
 		$headHtml .= "<head><title>JS Test</title>";
 		//$headHtml .= "<script type='text/javascript' src='hello.js'>";
