@@ -13,7 +13,7 @@ class HtmlClass {
 	}
 
 	function createBody(){
-		$bodyHtml ="";
+		$bodyHtml ="hello";
 		$bodyHtml .= "<body>";
 		$bodyHtml .= "<form method='post'>";
 		$bodyHtml .= "<label>Stack</label><select><option value='op1'>Option 1</option><option value='op2'>Option 2</option><option value='op3'>Option 3</option><option value='op4'>Option 4</option></select>";
