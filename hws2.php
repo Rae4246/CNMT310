@@ -1,4 +1,8 @@
 <?php
+
+SESSION_start();
+
+
 class HtmlClass {
 	function createHeadSection(){
 		$headHtml = "";
@@ -35,42 +39,49 @@ class HtmlClass {
 $html = new HtmlClass();
 
 print $html->createHeadSection();
-print $html->createBody();
-print $html->createBottomSection();
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_SESSION['istrue'])) {
 	
-	$fh = @fopen("/home/dtrap315/webfiles/music.txt","a+"); // file path for school computers
-	//$fh = @fopen("/home/dtrap315/webfiles/music.txt","a+"); // file path for xammpp
-	
-	//checking if $fh exists 
-	if (is_resource($fh)) 
-	{
-			//   
-			if (isset($_POST['submit'])){
-				
-				// grabs the variables
-				$songtitle = $_POST['songTitle'];
-				$songartist = $_POST['songArtist'];
-				$album = $_POST['album'];
-				$label = $_POST['label'];
-				$list = array( $songtitle, $songartist, $album, $label); // need array to make the delimiter work    			
-				
-				fputcsv($fh, $list); // writes file in delimited format
-				fclose($fh); // close file
-				
-				// display file
-				//file path for school computers("/home/jkiev461/webfiles/music.txt");
-				$file = "/home/dtrap315/webfiles/music.txt"; //file path
-				$screentext = file_get_contents($file); //file_get_contents — Reads entire file into a string
-				$screentext = nl2br($screentext); // nl2br — Inserts HTML line breaks before all newlines in a string
-				echo $screentext; // pukes the file out on the screen all nice and formated 
-			}
+	print $html->createBody();
+	print $html->createBottomSection();
 
-	}// end if 
 
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		//$fh = @fopen("/home/jkiev461/webfiles/music.txt","a+"); // file path for school computers
+		$fh = @fopen("music.txt","a+"); // file path for xammpp
+		
+		//checking if $fh exists 
+		if (is_resource($fh)) 
+		{
+				//   
+				if (isset($_POST['submit'])){
+					
+					// grabs the variables
+					$songtitle = $_POST['songTitle'];
+					$songartist = $_POST['songArtist'];
+					$album = $_POST['album'];
+					$label = $_POST['label'];
+					$list = array( $songtitle, $songartist, $album, $label); // need array to make the delimiter work    			
+					
+					fputcsv($fh, $list); // writes file in delimited format
+					fclose($fh); // close file
+					
+					// display file
+					//file path for school computers("/home/jkiev461/webfiles/music.txt");
+					$file = "music.txt"; //file path
+					$screentext = file_get_contents($file); //file_get_contents — Reads entire file into a string
+					$screentext = nl2br($screentext); // nl2br — Inserts HTML line breaks before all newlines in a string
+					echo $screentext; // pukes the file out on the screen all nice and formated 
+				}
+
+		}// end if 
+
+		
+	}else{ print"Welcome"; }
 	
-}else{ print"Welcome"; }
+} else{
+	print 'you are not logged in';
+}	//end session if statement
 
 ?>
