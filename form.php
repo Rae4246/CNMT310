@@ -1,5 +1,6 @@
 <?php
 
+SESSION_start();
 require_once "Page.php";
 
 $page = new Page("Form");
@@ -15,7 +16,7 @@ print $page->getTop();
 //improve this logic! it is terrible
 if (isset($_POST['username']))
 {
-		$fh = @fopen("/home/jkiev461/webfiles/password.txt","r");
+		$fh = @fopen("password.txt","r");
 		if (is_resource($fh))
 		{
         while ($line = fgets($fh)) 
@@ -25,6 +26,7 @@ if (isset($_POST['username']))
 									$_POST['password'] == rtrim($creds[1]))
 						{
 								$loggedIn = true;
+								$_SESSION['istrue'] = 'its set';
 						}  					
 				} //end while
   	}	
@@ -38,6 +40,8 @@ if (isset($_POST['username']))
 	else 
 	{
 		print "Welcome";
+		$_SESSION['istrue'] = 'its set';
+		header('Location: songwriterclass.php');/// redirect to new page
 	}
 }
 
