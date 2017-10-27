@@ -1,4 +1,20 @@
 <?php
+/*
+    _.-~~-.__
+ _-~ _-=-_   ''-,,
+('___ ~~~   0     ~''-_,,,,,,,,,,,,,,,,
+ \~~~~~~--'                            '''''''--,,,,
+  ~`-,_      ()                                     '''',,,
+       '-,_      \                           /             '', _~/|
+  ,.       \||/~--\ \_________              / /______...---.  ;  /
+  \ ~~~~~~~~~~~~~  \ )~~------~`~~~~~~~~~~~( /----         /,'/ /
+   |   -           / /                      \ \           /;/  /
+  / -             / /                        / \         /;/  / -.
+ /         __.---/  \__                     /, /|       |:|    \  \
+/_.~`-----~      \.  \ ~~~~~~~~~~~~~---~`---\\\\ \---__ \:\    /  /
+                  `\\\`                     ' \\' '    --\'\, /  /
+                                               '\,        ~-_'''"
+*/
 
 SESSION_start();
 
@@ -57,14 +73,14 @@ $page->getBottom();
 							
 							$timeStamp = explode("|",$line);
 							$time = $timeStamp[0];
-							$angst = 3600; // 3600 hour in seconds ANGST ANGST ANGST ANGST
+							$angst = 3600; // 3600 seconds in an hour ANGST ANGST ANGST ANGST
 							if($time > (time() - $angst))
 							{
-								
+								date_default_timezone_set('America/Chicago');// sets timezone to the America/Chicago timezone 
 								$lineParts = explode("|", $line);
-								$derp = (date('m/d h:iA',$lineParts[0])) . ' ' . $lineParts[1] . ' ' . $lineParts[2] . ' ' . $lineParts[3] . ' ' . $lineParts[4] . ' ' . $lineParts[5];
+								$derp = (date('m/d h:iA ',$lineParts[0])) . ' ' . $lineParts[1] . ' ' . $lineParts[2] . ' ' . $lineParts[3] . ' ' . $lineParts[4] . ' ' . $lineParts[5];
 								print nl2br($derp);// nl2br — Inserts HTML line breaks before all newlines in a string
-								// nl2br — Inserts HTML line breaks before all newlines in a string
+								
 							}/// hypr link with a query string to go back to prevous hours 
 								
 						} // end while
