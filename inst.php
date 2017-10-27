@@ -45,8 +45,8 @@ $page->getBottom();
 					$label = $_POST['label'];
 					$list = array( $date, $announcer, $songtitle, $songartist, $album, $label ); // need array to make the delimiter work    			
 					
-					
-					fputcsv($fh, $list); // writes file in delimited format
+					//change to pipe!!!!!!!
+					fputcsv($fh, $list, "|"); // writes file in delimited format
 					fclose($fh); // close file
 					
 					//$file = @fopen("/home/jkiev461/webfiles/music.txt","r"); // file path for school computers
@@ -55,13 +55,17 @@ $page->getBottom();
 						
 						while ($line = fgets($file)) {
 							
-							$timeStamp = explode(",",$line);
+							$timeStamp = explode("|",$line);
 							$time = $timeStamp[0];
-							$angst = 3600; //hour in seconds ANGST ANGST ANGST ANGST
+							$angst = 3600; // 3600 hour in seconds ANGST ANGST ANGST ANGST
 							if($time > (time() - $angst))
 							{
-								print nl2br($line);// nl2br — Inserts HTML line breaks before all newlines in a string
-							}
+								
+								$lineParts = explode("|", $line);
+								$derp = (date('m/d h:iA',$lineParts[0])) . ' ' . $lineParts[1] . ' ' . $lineParts[2] . ' ' . $lineParts[3] . ' ' . $lineParts[4] . ' ' . $lineParts[5];
+								print nl2br($derp);// nl2br — Inserts HTML line breaks before all newlines in a string
+								// nl2br — Inserts HTML line breaks before all newlines in a string
+							}/// hypr link with a query string to go back to prevous hours 
 								
 						} // end while
 						fclose($file);
