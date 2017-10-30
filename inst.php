@@ -39,8 +39,8 @@ $page->getBottom();
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		//$fh = @fopen("/home/jkiev461/webfiles/music.txt","a+"); // file path for school computers
-		$fh = @fopen("music.txt","a+"); // file path for xammpp
+		$fh = @fopen("/home/jkiev461/webfiles/music.txt","a+"); // file path for school computers
+		//$fh = @fopen("music.txt","a+"); // file path for xammpp
 		
 		//checking if $fh exists 
 		if (is_resource($fh)) 
@@ -61,8 +61,8 @@ $page->getBottom();
 					fputcsv($fh, $list, "|"); // writes file in delimited format use pipe | 
 					fclose($fh); // close file
 					
-					//$file = @fopen("/home/jkiev461/webfiles/music.txt","r"); // file path for school computers
-					$file = @fopen("music.txt","r"); // file path for xammpp
+					$file = @fopen("/home/jkiev461/webfiles/music.txt","r"); // file path for school computers
+					//$file = @fopen("music.txt","r"); // file path for xammpp
 					if (is_resource($file)) {
 						
 						while ($line = fgets($file)) {
