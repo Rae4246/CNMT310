@@ -26,19 +26,15 @@ $page = new Page();
 $form = new Form();
 //$page->addHeadItem("<script type='text/javascript' src=hello.js></script>");
 $page->setHeadSection("<link rel='stylesheet' type='text/css' href='pretty.css'>");
+
 $page->setTop();
+$form->setformSection("<a href='backInTime.php'>Want to go back more??</a>");
 $form->setForm();
 $page->setBottom();
-
-
-
 
 $page->getTop();
 $form->getForm();
 $page->getBottom();
-
-
-	
 
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -61,8 +57,8 @@ $page->getBottom();
 					$label = $_POST['label'];
 					$list = array( $date, $announcer, $songtitle, $songartist, $album, $label ); // need array to make the delimiter work    			
 					
-					//change to pipe!!!!!!!
-					fputcsv($fh, $list, "|"); // writes file in delimited format
+					
+					fputcsv($fh, $list, "|"); // writes file in delimited format use pipe | 
 					fclose($fh); // close file
 					
 					//$file = @fopen("/home/jkiev461/webfiles/music.txt","r"); // file path for school computers
@@ -89,14 +85,6 @@ $page->getBottom();
 						print "unable to open file";
 					}// end if is_resource
 					
-					// display file
-					//file path for school computers("/home/jkiev461/webfiles/music.txt");
-					//$file = ("/home/jkiev461/webfiles/music.txt");
-					//$file = "music.txt"; //file path
-					
-					//$screentext = file_get_contents($file); //file_get_contents — Reads entire file into a string
-					//$screentext = nl2br($screentext); // nl2br — Inserts HTML line breaks before all newlines in a string
-					//echo $screentext; // pukes the file out on the screen all nice and formated 
 				}
 
 		}// end if 
