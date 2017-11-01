@@ -17,6 +17,9 @@
 */
 
 SESSION_start();
+	
+	$_SESSION['angst'] = 0;
+	$_SESSION['hell'] = 3600;
 
 require_once("page.php");
 require_once("formClass.php");
@@ -29,6 +32,7 @@ $page->setHeadSection("<link rel='stylesheet' type='text/css' href='pretty.css'>
 
 $page->setTop();
 $form->setformSection("<a href='backInTime.php'>Want to go back more??</a>");
+
 $form->setForm();
 $page->setBottom();
 
@@ -39,8 +43,8 @@ $page->getBottom();
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		$fh = @fopen("/home/jkiev461/webfiles/music.txt","a+"); // file path for school computers
-		//$fh = @fopen("music.txt","a+"); // file path for xammpp
+		//$fh = @fopen("../webfiles/music.txt","a+"); // file path for school computers
+		$fh = @fopen("music.txt","a+"); // file path for xammpp
 		
 		//checking if $fh exists 
 		if (is_resource($fh)) 
@@ -61,8 +65,8 @@ $page->getBottom();
 					fputcsv($fh, $list, "|"); // writes file in delimited format use pipe | 
 					fclose($fh); // close file
 					
-					$file = @fopen("/home/jkiev461/webfiles/music.txt","r"); // file path for school computers
-					//$file = @fopen("music.txt","r"); // file path for xammpp
+					//$file = @fopen("../webfiles/music.txt","r"); // file path for school computers
+					$file = @fopen("music.txt","r"); // file path for xammpp
 					if (is_resource($file)) {
 						
 						while ($line = fgets($file)) {
@@ -90,7 +94,8 @@ $page->getBottom();
 		}// end if 
 	}
 } else{
-	print "<h1>you are not logged in</h1>";
+	print "<h1>you are not logged in</h1><br>";
+	print "<a href='login.php'> you need to log in</a><br>";
 }	//end session if statement
 
 
