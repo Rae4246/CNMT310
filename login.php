@@ -27,8 +27,8 @@ print $page->getTop();
 //improve this logic! it is terrible
 if (isset($_POST['username']))
 {
-		//$fh = @fopen("password.txt","r");// xammp file path
-		$fh = @fopen("/home/jkiev461/webfiles/password.txt","r"); // school file path
+		$fh = @fopen("password.txt","r");// xammp file path
+		//$fh = @fopen("../webfiles/password.txt","r"); // school file path
 		if (is_resource($fh))
 		{
         while ($line = fgets($fh)) 
