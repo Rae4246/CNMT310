@@ -32,7 +32,6 @@ class Page {
 	function setBottom() {
 		$returnVal = "";
 		$returnVal .= "<h1> The bottom is working</h1>";
-		$returnVal .= $this->_bottomSection;
 		$returnVal .= "</body>\n";
 		$returnVal .= "</html>";
 		$this->_bottom = $returnVal;
@@ -41,9 +40,7 @@ class Page {
 	  $this->_headSection .= $include;
 	} //end function setHeadSection
 	
-	function setBottomSection($include) {
-	  $this->_bottomSection .= $include;
-	} //end function setBottomSection
+
 } // end class
 
 
