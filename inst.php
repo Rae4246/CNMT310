@@ -1,20 +1,4 @@
 <?php
-/*
-    _.-~~-.__
- _-~ _-=-_   ''-,,
-('___ ~~~   0     ~''-_,,,,,,,,,,,,,,,,
- \~~~~~~--'                            '''''''--,,,,
-  ~`-,_      ()                                     '''',,,
-       '-,_      \                           /             '', _~/|
-  ,.       \||/~--\ \_________              / /______...---.  ;  /
-  \ ~~~~~~~~~~~~~  \ )~~------~`~~~~~~~~~~~( /----         /,'/ /
-   |   -           / /                      \ \           /;/  /
-  / -             / /                        / \         /;/  / -.
- /         __.---/  \__                     /, /|       |:|    \  \
-/_.~`-----~      \.  \ ~~~~~~~~~~~~~---~`---\\\\ \---__ \:\    /  /
-                  `\\\`                     ' \\' '    --\'\, /  /
-                                               '\,        ~-_'''"
-*/
 
 SESSION_start();
 	
@@ -28,8 +12,15 @@ if (isset($_SESSION['istrue'])) {
 $page = new Page();
 $form = new Form();
 //$page->addHeadItem("<script type='text/javascript' src=hello.js></script>");
-$page->setHeadSection("<link rel='stylesheet' type='text/css' href='pretty.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_log.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_acc.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_prev.css'>");
+$page->setNavSection("<ul><li><a href='#'>Previously Played</a></li><li><a href='#'>Playlist Log</a></li><li><a href='#'>Free-Form Reporting</a></li><li><a href='#'>Admin Edit Page</a></li></ul>");
 
+$page->setHeaderCoverSection("<div class='head-title'><h1>WWSP - 90FM<h1><h2>DJ Hub</h2></div>");
+$page->setHeaderCoverSection("<div class='head-logo'><img src='WWSP_90fm_mic.png'></div>");
+$page->setHeaderCoverSection("<div class='head-login'>Login Form Goes here</div>");
 $page->setTop();
 $form->setformSection("<a href='backInTime.php'>Want to go back more??</a>");
 
