@@ -1,12 +1,14 @@
 <?php
 
-
 class Page {
 	private $_top;
 	private $_bottom;
 	private $_title;
 	private $_headSection = "";
 	private $_bottomSection = "";
+	private $_headerCoverSection = "";
+	private $_navSection = "";
+	private $_mainContentSection = "";
 	function __construct($title = "Default") {
 		$this->_title = $title;
 	}
@@ -24,15 +26,26 @@ class Page {
 		$returnVal .= $this->_title;
 		$returnVal .= "</title>";
 		$returnVal .= $this->_headSection;
-		$returnVal .= "</head>";
-		$returnVal .= "<body>";
-		$returnVal .= "<h1> The top is working</h1>";
+		$returnVal .= "</head>";//ends head section
+		$returnVal .= "<body><div class='wrapper'>";//Wrapper goes around EVERYTHING 
+		$returnVal .= "<header>";//Header goes around Header cover and Nav
+		$returnVal .= "<div class='header-cover'>";
+		$returnVal .= $this->_headerCoverSection;
+		$returnVal .= "</div><nav>";//start of Nav
+		$returnVal .= $this->_navSection;
+		$returnVal .= "</nav></header>";//Ends nav and header
+		$returnVal .= "<section class='main-container'>";//opens main container section
+		$returnVal .= "<div class='title-wrapper'><h2>Page title</h2><div>";
+		$returnVal .= "<div class='main-content'>";
+		$returnVal .= $this->_mainContentSection;
+		$returnVal .= "</div>";//ends main content section
 		$this->_top = $returnVal;
 	}
 	function setBottom() {
 		$returnVal = "";
 		$returnVal .= "<h1> The bottom is working</h1>";
-		$returnVal .= "</body>\n";
+		$returnVal .= $this->_bottomSection;
+		$returnVal .= "</div></div></body>\n";
 		$returnVal .= "</html>";
 		$this->_bottom = $returnVal;
 	}
@@ -40,7 +53,21 @@ class Page {
 	  $this->_headSection .= $include;
 	} //end function setHeadSection
 	
-
+	function setHeaderCoverSection($include) {
+	  $this->_headerCoverSection .= $include;
+	} //end function setHeaderCoverSection
+	
+	function setNavSection($include) {
+	  $this->_navSection .= $include;
+	} //end function setNavSection
+		
+	function setMainContentSection($include) {
+	  $this->_mainContentSection .= $include;
+	} //end function setMainContentSection
+	
+	function setBottomSection($include) {
+	  $this->_bottomSection .= $include;
+	} //end function setBottomSection
 } // end class
 
 

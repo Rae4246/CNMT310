@@ -1,24 +1,12 @@
 <?php
-/*
-    _.-~~-.__
- _-~ _-=-_   ''-,,
-('___ ~~~   0     ~''-_,,,,,,,,,,,,,,,,
- \~~~~~~--'                            '''''''--,,,,
-  ~`-,_      ()                                     '''',,,
-       '-,_      \                           /             '', _~/|
-  ,.       \||/~--\ \_________              / /______...---.  ;  /
-  \ ~~~~~~~~~~~~~  \ )~~------~`~~~~~~~~~~~( /----         /,'/ /
-   |   -           / /                      \ \           /;/  /
-  / -             / /                        / \         /;/  / -.
- /         __.---/  \__                     /, /|       |:|    \  \
-/_.~`-----~      \.  \ ~~~~~~~~~~~~~---~`---\\\\ \---__ \:\    /  /
-                  `\\\`                     ' \\' '    --\'\, /  /
-                                               '\,        ~-_'''"
-*/
+
 SESSION_start();
 require_once "page.php";
 $page = new Page("Form");
-$page->setHeadSection("<link rel='stylesheet' type='text/css' href='pretty.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_log.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_acc.css'>");
+$page->setHeadSection("<link rel='stylesheet' type='text/css' href='style_prev.css'>");
 $page->setTop();
 $page->setBottom();
 $errors = array();
