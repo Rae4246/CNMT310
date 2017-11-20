@@ -49,7 +49,7 @@ CREATE TABLE Album (
 
 CREATE TABLE Artist (
 	artist_id int not null primary key auto_increment,
-    	album_name varchar(255)
+    	artist_name varchar(255)
 );
 
 CREATE TABLE Label (
@@ -59,7 +59,7 @@ CREATE TABLE Label (
 
 CREATE TABLE Stack (
 	stack_id int not null primary key auto_increment,
-    	stack_name int
+    	stack_name varchar(255)
 );
 
 ALTER TABLE userrole
