@@ -23,12 +23,14 @@ $page->setHeaderCoverSection("<div class='head-logo'><img src='WWSP_90fm_mic.png
 $page->setHeaderCoverSection("<div class='head-login'>Login Form Goes here</div>");
 $page->setTop();
 $form->setformSection("<a href='backInTime.php'>Want to go back more??</a>");
+//$form->setSongSection();
 
 $form->setForm();
 $page->setBottom();
 
 $page->getTop();
-$form->getForm();
+$page->setLogFormSection($form->getForm());
+$page->setSongContainerSection($form->getSongs());
 $page->getBottom();
 
 

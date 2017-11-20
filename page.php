@@ -8,7 +8,8 @@ class Page {
 	private $_bottomSection = "";
 	private $_headerCoverSection = "";
 	private $_navSection = "";
-	private $_mainContentSection = "";
+	private $_logFormSection = "";
+	private $_songContainerSection = "";
 	function __construct($title = "Default") {
 		$this->_title = $title;
 	}
@@ -35,9 +36,10 @@ class Page {
 		$returnVal .= $this->_navSection;
 		$returnVal .= "</nav></header>";//Ends nav and header
 		$returnVal .= "<section class='main-container'>";//opens main container section
-		$returnVal .= "<div class='title-wrapper'><h2>Page title</h2><div>";
+		$returnVal .= "<div class='title-wrapper'><h2>Page title</h2></div>";
 		$returnVal .= "<div class='main-content'>";
-		$returnVal .= $this->_mainContentSection;
+		$returnVal .= $this->_logFormSection;
+		$returnVal .= $this->_songContainerSection;
 		$returnVal .= "</div>";//ends main content section
 		$this->_top = $returnVal;
 	}
@@ -45,7 +47,7 @@ class Page {
 		$returnVal = "";
 		$returnVal .= "<h1> The bottom is working</h1>";
 		$returnVal .= $this->_bottomSection;
-		$returnVal .= "</div></div></body>\n";
+		$returnVal .= "</div></body>\n";
 		$returnVal .= "</html>";
 		$this->_bottom = $returnVal;
 	}
@@ -61,9 +63,13 @@ class Page {
 	  $this->_navSection .= $include;
 	} //end function setNavSection
 		
-	function setMainContentSection($include) {
-	  $this->_mainContentSection .= $include;
-	} //end function setMainContentSection
+	function setLogFormSection($include) {
+	  $this->_logFormSection .= $include;
+	} //end function setLogFormSection
+	
+	function setSongContainerSection($include) {
+	  $this->_songContainerSection .= $include;
+	} //end function setSongContainerSection
 	
 	function setBottomSection($include) {
 	  $this->_bottomSection .= $include;
