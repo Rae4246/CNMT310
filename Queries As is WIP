@@ -1,0 +1,266 @@
+-- JEREMY DIANA LOGAN JACOB
+
+SET foreign_key_checks = 0;
+drop table users cascade;
+drop table userrole cascade;
+drop table role cascade;
+drop table musicentries cascade;
+drop table songs cascade;
+drop table album cascade;
+drop table artist cascade;
+drop table label cascade;
+drop table stack cascade;
+SET foreign_key_checks = 1;
+
+CREATE TABLE users (
+	user_id int not null primary key auto_increment,
+    username varchar(255),
+    pass varchar(255),
+    stat varchar(255),
+    last_login datetime,
+    realname varchar(255)
+);
+
+CREATE TABLE userrole (
+	user_role_id int not null primary key auto_increment,
+    user_id int not null,
+    role_id int,
+    last_change datetime
+);
+
+CREATE TABLE role (
+	role_id int not null primary key auto_increment,
+    role_name varchar(255)
+);
+
+CREATE TABLE musicentries (
+	musicEntryID int not null primary key auto_increment,
+	song_id int,
+    album_id int,
+    label_id int,
+    stack_id int,
+    artist_id int,
+    user_id int,
+    time_stamp datetime
+);
+
+CREATE TABLE songs (
+	song_id int not null primary key auto_increment,
+    song_name varchar(255),
+    album_id int,
+    label_id int,
+    stack_id int,
+    artist_id int
+);
+
+CREATE TABLE album (
+	album_id int not null primary key auto_increment,
+    album_name varchar(255),
+    artist_id int,
+    label_id int
+);
+
+CREATE TABLE artist (
+	artist_id int not null primary key auto_increment,
+    artist_name varchar(255)
+);
+
+CREATE TABLE label (
+	label_id int not null primary key auto_increment,
+    label_name varchar(255)
+);
+
+CREATE TABLE stack (
+	stack_id int not null primary key auto_increment,
+    stack_name int
+);
+
+
+
+-- alter tables add foreign key table userrole
+Alter table userrole
+add foreign key(user_id) references users(user_id); 
+
+Alter table userrole
+add foreign key(role_id) references role(role_id);
+
+
+-- alter tables add foreign key table role
+Alter table role
+add foreign key(role_id) references userrole(role_id);
+
+
+-- alter tables add foreign key table musicentries
+
+
+Alter table musicentries
+add foreign key(song_id) references songs(song_id); 
+
+Alter table musicentries
+add foreign key(album_id) references album(album_id);
+
+Alter table musicentries
+add foreign key(label_id) references label(label_id);
+
+Alter table musicentries
+add foreign key(stack_id) references stack(stack_id);
+
+Alter table musicentries
+add foreign key(artist_id) references artist(artist_id);
+
+Alter table musicentries
+add foreign key(user_id) references users(user_id);
+
+-- alter tables add foreign key table user
+
+Alter table users
+add foreign key(user_id) references musicentries(user_id);
+
+Alter table users
+add foreign key(user_id) references userrole(user_id);
+
+
+-- alter tables add foreign key table songs
+
+Alter table songs
+add foreign key(album_id) references musicentries(album_id);
+
+Alter table songs
+add foreign key(album_id) references album(album_id);
+
+Alter table songs
+add foreign key(label_id) references musicentries(label_id);
+
+Alter table songs
+add foreign key(label_id) references label(label_id);
+
+Alter table songs
+add foreign key(stack_id) references musicentries(stack_id);
+
+Alter table songs
+add foreign key(label_id) references stack(stack_id);
+
+Alter table songs
+add foreign key(artist_id) references artist(artist_id);
+
+Alter table songs
+add foreign key(label_id) references stack(stack_id);
+
+Alter table songs
+add foreign key(artist_id) references artist(artist_id);
+
+-- alter tables add foreign key table album
+
+Alter table album
+add foreign key(album_id) references songs(album_id);
+
+Alter table album
+add foreign key(artist_id) references songs(artist_id);
+
+Alter table album
+add foreign key(label_id) references songs(label_id);
+
+Alter table album
+add foreign key(artist_id) references artist(artist_id);
+
+Alter table album
+add foreign key(label_id) references label(label_id);
+
+-- alter tables add foreign key table Artist
+
+Alter table artist
+add foreign key(artist_id) references album(artist_id);
+
+-- alter tables add foreign key table label
+
+Alter table label
+add foreign key(label_id) references album(label_id);
+
+-- ------------------------------------------------------ --
+
+--  display playlist
+SELECT m.musicEntryID, s.song_name, a.album_name, l.label_name, st.stack_name, art.artist_name, u.realname, m.time_stamp
+FROM musicentries as m, songs as s, album as a, label as l, stack as st, artist as art, users as u
+WHERE m.song_id = s.song_id
+	and m.album_id = a.album_id
+    and m.label_id = l.label_id
+    and m.stack_id = st.stack_id
+    and m.artist_id = art.artist_id
+    and m.user_id = u.user_id
+ORDER BY time_stamp;
+
+-- build the reports
+-- top 10 songs played in the last 7 days
+SELECT * , (count(song_id))as count
+FROM musicentries
+-- timestamp is defined in our other files
+-- WHERE time_stamp > (sec_to_time(timestamp)-25200) 
+Order By count(song_id)
+LIMIT 0,10 ;
+
+
+-- most frequent 5 songs from the stack chosen by user in the last 7 days
+SELECT *,(count(song_id)) as sount
+FROM musicentries 
+-- selected stack defined in report page
+WHERE stack_id = selected_stack
+		AND time_stamp > (timestamp-25200)
+GROUP BY song_id
+Order By count(song_id) 
+LIMIT 0,5;
+
+-- allow music director to change the title of a song
+UPDATE songs, album
+SET song_name = entered_name WHERE album_name = selected_album AND song_name = selected_song;
+-- extra permissions will be needed to execute
+-- entered_name, selected_album, and selected_song are inputed via the webpage or can be entered here.
+
+-- incomplete alternative
+-- UPDATE songs
+-- SET song_name = entered_name WHERE song_id = (	SELECT song_id
+-- 												FROM songs
+--                                                WHERE song_name = entered_name)
+-- 							 AND album_id = selected_ablum
+                                                
+-- create data --
+INSERT INTO artist (artist_name)
+VALUE ("Ke$ha");
+
+INSERT INTO album (album_name)
+VALUE ("Ke$ha's Greatest Hit");
+
+INSERT INTO label (label_name)
+VALUE ("Ke$ha's Label");
+
+INSERT INTO songs (song_name)
+VALUE ("Get Sleazy");
+
+INSERT INTO stack (stack_name)
+VALUE ("1");
+
+INSERT INTO users (username)
+VALUE ("Kesha");
+
+-- -----------------------------
+
+INSERT INTO artist (artist_name)
+VALUE ("JaCoB");
+
+INSERT INTO album (album_name)
+VALUE ("JaCoB's ROuGH LiFe Album");
+
+INSERT INTO label (label_name)
+VALUE ("JaCoB InC.");
+
+INSERT INTO songs (song_name)
+VALUE ("oNe'S and 0's");
+
+INSERT INTO stack (stack_name)
+VALUE ("1");
+
+INSERT INTO users (username)
+VALUE ("Jacob");
+
+-- Update users
+-- set pass = "12345"
+-- WHERE username = "Jacob";
